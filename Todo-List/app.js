@@ -1,64 +1,69 @@
 const form = document.querySelector('#form');
 const list = document.querySelector('#list');
 
-// TODO
-// 1. Organise the below code into class TodoList
-// 2. Put all the code in the github repo
+class TodoList {
+    constructor(todos) {
+        this.todos = todos;
+    }
 
-function uuid() {
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    static uuid() {
+        var S4 = function() {
+           return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    }
+
+    refreshTodos() {
+        while (list.firstChild) {
+            list.firstChild.remove();
+        }
+        for (let todo of this.todos) {
+            const li = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.setAttribute('type', 'checkbox');
+        
+            li.innerText = todo.task;
+            li.append(checkbox);
+            list.append(li);
+        }
+    }
+    
+    addTodo(todoText) {
+        this.todos.push({ id: TodoList.uuid(), task: todoText, completed: false });
+        this.refreshTodos();
+    }
+
+    init() {
+        this.refreshTodos();
+    }
 }
+
 
 const todos = [
     {
-        id: uuid(),
+        id: TodoList.uuid(),
         task: "Buy Groceries",
         completed: false
     },
     {
-        id: uuid(),
+        id: TodoList.uuid(),
         task: "Learn JS",
         completed: false
     },
     {
-        id: uuid(),
+        id: TodoList.uuid(),
         task: "Go to Gym",
         completed: false
     }
 ];
 
-function refreshTodos() {
-    while (list.firstChild) {
-        list.firstChild.remove();
-    }
-    for (let todo of todos) {
-        const li = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.setAttribute('type', 'checkbox');
-    
-        li.innerText = todo.task;
-        li.append(checkbox);
-        list.append(li);
-    }
-}
+const myTodoList = new TodoList(todos);
 
-function addTodo(todoText) {
-    todos.push({ id: uuid(), task: todoText, completed: false });
-    refreshTodos();
-}
+myTodoList.init();
 
 form.addEventListener('submit', function (event) {
     event.preventDefault();
     const todoText = form.elements[0].value;
     console.log(todoText);
-    addTodo(todoText);
+    myTodoList.addTodo(todoText);
 });
-
-function init() {
-    refreshTodos();
-}
-
-init();
