@@ -1,5 +1,6 @@
 const form = document.querySelector('#form');
 const list = document.querySelector('#list');
+const input = document.getElementById('todo-inp');
 
 class TodoList {
     constructor(todos) {
@@ -21,6 +22,7 @@ class TodoList {
             const li = document.createElement('li');
             const checkbox = document.createElement('input');
             checkbox.setAttribute('type', 'checkbox');
+            checkbox.setAttribute('class', 'form-check-input');
         
             li.innerText = todo.task;
             li.append(checkbox);
@@ -66,4 +68,5 @@ form.addEventListener('submit', function (event) {
     const todoText = form.elements[0].value;
     console.log(todoText);
     myTodoList.addTodo(todoText);
+    input.value = '';
 });
