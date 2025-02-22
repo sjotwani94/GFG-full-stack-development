@@ -1,14 +1,22 @@
-section{
+body {
+    background-color: deepskyblue !important;
+}
+
+section {
     width: 400px;
     border: 2px solid black;
-    padding: 10px;
     margin: 30px auto;
+
+    .card-header {
+        padding: 20px;
+    }
 }
-h1{
+
+h1 {
     text-align: center;
 }
 
-#todo-inp{
+#todo-input {
     font-size: 1.2rem;
     width: 100%;
     margin-bottom: 10px;

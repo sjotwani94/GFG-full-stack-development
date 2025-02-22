@@ -1,6 +1,9 @@
 const form = document.querySelector('#form');
 const list = document.querySelector('#list');
-const input = document.getElementById('todo-inp');
+const input = document.getElementById('todo-input');
+
+// Strikethrough when checked
+// Delete Functionality
 
 class TodoList {
     constructor(todos) {
@@ -24,7 +27,7 @@ class TodoList {
             checkbox.setAttribute('type', 'checkbox');
             checkbox.setAttribute('class', 'form-check-input');
         
-            li.innerText = todo.task;
+            li.innerText = todo.task + ' ';
             li.append(checkbox);
             list.append(li);
         }
@@ -32,6 +35,7 @@ class TodoList {
     
     addTodo(todoText) {
         this.todos.push({ id: TodoList.uuid(), task: todoText, completed: false });
+        localStorage.setItem('TodoList', JSON.stringify(this.todos));
         this.refreshTodos();
     }
 
@@ -59,7 +63,14 @@ const todos = [
     }
 ];
 
-const myTodoList = new TodoList(todos);
+const savedTodos = JSON.parse(localStorage.getItem('TodoList'));
+
+let myTodoList = [];
+if (savedTodos && savedTodos.length !== 0) {
+    myTodoList = new TodoList(savedTodos);
+} else {
+    myTodoList = new TodoList(todos);
+}
 
 myTodoList.init();
 

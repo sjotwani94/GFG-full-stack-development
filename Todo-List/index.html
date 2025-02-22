@@ -11,13 +11,16 @@
 
     <h1>Todo List</h1>
 
-    <section>
-        <form id="form">
-            <input type="text" class="form-control" id="todo-inp">
-            <button id="add-btn" class="btn btn-primary">Add New Todo</button>
-        </form>
-        
-        <ul id="list"></ul>
+    <section class="card">
+        <div class="card-header">
+            <form id="form">
+                <input type="text" class="form-control" placeholder="Enter Todo Item Here..." id="todo-input">
+                <button id="add-btn" class="btn btn-primary">Add New Todo</button>
+            </form>
+        </div>
+        <div class="card-body">
+            <ol id="list"></ol>
+        </div>
     </section>
     
 
