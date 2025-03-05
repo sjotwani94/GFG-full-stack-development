@@ -10,6 +10,22 @@ section {
     .card-header {
         padding: 20px;
     }
+
+    .card-body {
+        ol {
+            padding: 0 10px;
+            margin-bottom: 0;
+
+            li {
+                display: flex;
+                justify-content: space-between;
+
+                label {
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
 }
 
 h1 {
